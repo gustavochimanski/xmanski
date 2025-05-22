@@ -2,11 +2,11 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardDescription,  CardTitle } from "@/components/ui/card";
 import { ModalChamarGarcom } from "./cardapio/components/SheetChamarGarcom";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+
+import { MenuCard } from "./cardapio/components/menuCard";
 
 const menu = [
   {
@@ -92,15 +92,9 @@ const menu = [
   },
 ];
 
-
 export default function HomePage() {
-  const [modalOpen, setModalOpen] = useState(false)
-  const [mesaSelecionada, setMesaSelecionada] = useState("")
+  const [modalOpen, setModalOpen] = useState(false);
 
-  function abrirModalComMesa(mesa: string) {
-    setMesaSelecionada(mesa);
-    setModalOpen(true);
-  }
   return (
     <main className="p-6 bg-black min-h-screen text-white">
       <header className="text-center mb-10">
@@ -120,49 +114,25 @@ export default function HomePage() {
         </CardDescription>
       </header>
 
-
       <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {menu.map((item, i) => (
-          <motion.div
+          <MenuCard
             key={i}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-          >
-            <Card className="bg-[#1e1e1e] h-full border p-0 border-[#f2a900]/30 hover:border-[#f2a900] hover:scale-[1.02] transition-all cursor-pointer rounded-xl">
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={600}
-                height={800}
-                className="w-full h-80 object-cover rounded-t-xl select-none pointer-events-none"
-                priority={i < 3}
-              />
-
-              <CardHeader className="">
-                <CardTitle className="text-[#f2a900] text-lg">
-                  {item.title} – <span className="text-white">{item.price}</span>
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent>
-                <p className="text-gray-100 text-sm leading-relaxed mb-1">
-                  {item.description}
-                </p>
-                <p className="italic text-gray-400 text-xs">“{item.quote}”</p>
-              </CardContent>
-
-              <CardFooter className="mb-3 justify-center">
-                <Button className="bg-[#f2a900] w-full text-zinc-900 hover:text-white" onClick={() => abrirModalComMesa(item.title)}>Chamar Garçom</Button>
-                <ModalChamarGarcom
-                  open={modalOpen}
-                  onOpenChange={setModalOpen}
-                />
-              </CardFooter>
-            </Card>
-          </motion.div>
+            title={item.title}
+            price={item.price}
+            description={item.description}
+            quote={item.quote}
+            image={item.image}
+            highlight={item.highlight}
+            onChamarGarcom={() => setModalOpen(true)}
+          />
         ))}
       </section>
+
+      <ModalChamarGarcom
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
     </main>
   );
 }
