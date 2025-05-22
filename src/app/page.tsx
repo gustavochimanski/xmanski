@@ -157,7 +157,6 @@ export default function HomePage() {
                 <ModalChamarGarcom
                   open={modalOpen}
                   onOpenChange={setModalOpen}
-                  mesa={mesaSelecionada}
                 />
               </CardFooter>
             </Card>
