@@ -2,9 +2,10 @@
 "use client";
 
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
 
 const menu = [
   {
@@ -102,38 +103,82 @@ const menu = [
 const categories = ["Clássicos","Hardcore", "Apimentados", ];
 
 export default function HomePage() {
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
+
+  const filteredMenu =
+    selectedCategory === "Todos"
+      ? menu
+      : menu.filter((item) => item.category === selectedCategory);
+
   return (
     <main className="p-6 bg-black min-h-screen text-white">
       <header className="text-center mb-10">
-        <h1 className="text-4xl font- font-extrabold text-[#f2a900]">🍔 XMANSKI </h1>
-        <p className="text-gray-300 italic mt-2 max-w-xl mx-auto">
-          “95% dos clientes voltam... Os outros 5%? Não resistiram de tanto comer...”
-        </p>
+        <div className="flex items-center justify-center gap-4 mx-auto w-fit">
+          <Image src="/logo.png" alt="Logo" width={80} height={80} />
+          <h1 className="text-4xl font-extrabold text-[#f2a900]">XMANSKI</h1>
+        </div>
+
+        <CardTitle className="text-gray-300 italic mt-2 max-w-xl mx-auto">
+          95% dos clientes voltam !!!
+        </CardTitle>
+        <CardDescription className="text-gray-400 italic mt-1 max-w-xl mx-auto">
+          Os outros 5%... Não resistiram de tanto comer... 😭
+        </CardDescription>
       </header>
 
+      {/* 🔥 Botões de categorias */}
+      <div className="flex justify-center gap-2 flex-wrap mb-8">
+        {categories.map((cat) => (
+          <Button
+            key={cat}
+            variant={selectedCategory === cat ? "default" : "outline"}
+            onClick={() => setSelectedCategory(cat)}
+            className="text-white border-[#f2a900] hover:bg-[#f2a900] hover:text-black"
+          >
+            {cat}
+          </Button>
+        ))}
+      </div>
+
+      {/* 🍔 Cardápio */}
       <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {menu.map((item, i) => (
-          <motion.article
+        {filteredMenu.map((item, i) => (
+          <motion.div
             key={i}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="bg-[#1e1e1e] rounded-xl border border-[#f2a900]/30 p-5 cursor-pointer hover:scale-[1.02] hover:border-[#f2a900] transition-transform transition-colors"
           >
-            <Image
-              src={item.image}
-              alt={item.title}
-              width={600}
-              height={600}
-              className="w-full h-72 object-cover rounded-lg mb-4 select-none pointer-events-none"
-              priority={i < 3}
-            />
-            <h2 className="text-[#f2a900] text-xl font-semibold mb-1">
-              {item.title} – <span className="text-white">{item.price}</span>
-            </h2>
-            <p className="text-gray-100 mb-2 text-sm leading-relaxed">{item.description}</p>
-            <p className="italic text-gray-400 text-xs">“{item.quote}”</p>
-          </motion.article>
+            <Card className="bg-[#1e1e1e] border p-0 border-[#f2a900]/30 hover:border-[#f2a900] hover:scale-[1.02] transition-all cursor-pointer rounded-xl">
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={600}
+                height={800}
+                className="w-full h-80 object-cover rounded-t-xl select-none pointer-events-none"
+                priority={i < 3}
+              />
+
+              <CardHeader>
+                <CardTitle className="text-[#f2a900] text-lg">
+                  {item.title} – <span className="text-white">{item.price}</span>
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent>
+                <p className="text-gray-100 text-sm leading-relaxed mb-1">
+                  {item.description}
+                </p>
+                <p className="italic text-gray-400 text-xs">“{item.quote}”</p>
+              </CardContent>
+
+              <CardFooter className="mb-3">
+                <Button className="bg-[#f2a900] text-black hover:bg-[#ffc400] w-full">
+                  Chamar Garçom
+                </Button>
+              </CardFooter>
+            </Card>
+          </motion.div>
         ))}
       </section>
     </main>
