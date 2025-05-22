@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState } from "react";
 
 const menu = [
   {
@@ -100,21 +99,18 @@ const menu = [
   },
 ];
 
-const categories = ["Clássicos","Hardcore", "Apimentados", ];
 
 export default function HomePage() {
-  const [selectedCategory, setSelectedCategory] = useState("Todos");
-
-  const filteredMenu =
-    selectedCategory === "Todos"
-      ? menu
-      : menu.filter((item) => item.category === selectedCategory);
-
   return (
     <main className="p-6 bg-black min-h-screen text-white">
       <header className="text-center mb-10">
         <div className="flex items-center justify-center gap-4 mx-auto w-fit">
-          <Image src="/logo.png" alt="Logo" width={80} height={80} />
+          <Image 
+            src={"/logo.png"} 
+            alt={"Logo"} 
+            width={80}
+            height={80}
+          />
           <h1 className="text-4xl font-extrabold text-[#f2a900]">XMANSKI</h1>
         </div>
 
@@ -126,23 +122,9 @@ export default function HomePage() {
         </CardDescription>
       </header>
 
-      {/* 🔥 Botões de categorias */}
-      <div className="flex justify-center gap-2 flex-wrap mb-8">
-        {categories.map((cat) => (
-          <Button
-            key={cat}
-            variant={selectedCategory === cat ? "default" : "outline"}
-            onClick={() => setSelectedCategory(cat)}
-            className="text-white border-[#f2a900] hover:bg-[#f2a900] hover:text-black"
-          >
-            {cat}
-          </Button>
-        ))}
-      </div>
 
-      {/* 🍔 Cardápio */}
       <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {filteredMenu.map((item, i) => (
+        {menu.map((item, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 40 }}
@@ -159,7 +141,7 @@ export default function HomePage() {
                 priority={i < 3}
               />
 
-              <CardHeader>
+              <CardHeader className="">
                 <CardTitle className="text-[#f2a900] text-lg">
                   {item.title} – <span className="text-white">{item.price}</span>
                 </CardTitle>
