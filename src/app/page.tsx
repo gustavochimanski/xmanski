@@ -14,7 +14,6 @@ const menu = [
       "90g de carne suculenta, cheddar, maionese da casa e pão brioche selado na manteiga.",
     quote: "Feito pra pequenos guerreiros com fome de verdade.",
     image: "/menu/brutinho.jpg",
-    category: "Clássicos",
     highlight: false,
   },
   {
@@ -24,7 +23,6 @@ const menu = [
       "130g de carne suculenta, cheddar duplo, cebola caramelizada e pão brioche selado na manteiga.",
     quote: "Pequeno no preço, gigante no sabor.",
     image: "/menu/classico.jpg",
-    category: "Clássicos",
     highlight: true,
   },
   {
@@ -34,7 +32,6 @@ const menu = [
     "130g, cheddar defumado, cream cheese, bacon, ovo, presunto, alface, tomate, cebola roxa, milho, batata palha, maionese e pão brioche.",
     quote: "Come, luta e grita SKÅL!",
     image: "/menu/xtudo.jpg",
-    category: "Hardcore",
     highlight: true,
   },
   {
@@ -44,7 +41,6 @@ const menu = [
       "130g, cheddar defumado, cream cheese, cebola roxa, picles, milho, maionese do céu e pão brioche.",
     quote: "Só para os mais chegados, que conhecem o Sabor!",
     image: "/menu/xmanski.jpg",
-    category: "Hardcore",
     highlight: false,
   },
   {
@@ -54,7 +50,6 @@ const menu = [
       "130g de carne, queijo prato, alface, tomate, cebola roxa, maionese da casa e pão brioche.",
     quote: "Simples, forte e sem frescura.",
     image: "/menu/soraiz.jpg",
-    category: "Clássicos",
     highlight: false,
   },
   {
@@ -64,7 +59,6 @@ const menu = [
       "Peito de frango, queijo prato, bacon, alface, tomate, maionese e pão brioche.",
     quote: "Galando na guerra dos sabores. 🐓🔥",
     image: "/menu/galodeguerra.jpg",
-    category: "Clássicos",
     highlight: false,
   },
   {
@@ -74,7 +68,6 @@ const menu = [
       "130g, queijo prato, bacon, ovo frito na manteiga, pimenta do reino, pão brioche.",
     quote: "Esse lanche vale cada mordida 🥚💥",
     image: "/menu/gemadura.jpg",
-    category: "Clássicos",
     highlight: false,
   },
   {
@@ -84,7 +77,6 @@ const menu = [
       "130g, queijo prato, calabresa, cebola roxa, picles, maionese da casa, pão brioche.",
     quote: "Fogo na garganta, soco no sabor. 🔥🌶️",
     image: "/menu/calabreso.jpg",
-    category: "Apimentados",
     highlight: false,
   },
   {
@@ -94,7 +86,6 @@ const menu = [
       "130g, queijo, catupiry, tomate, bacon rústico, maionese da casa e pão brioche.",
     quote: "É bagual, é raiz, é brabeza no dente.",
     image: "/menu/bagual.jpg",
-    category: "Clássicos",
     highlight: false,
   },
 ];
