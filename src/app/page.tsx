@@ -3,8 +3,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { ModalChamarGarcom } from "./cardapio/components/SheetChamarGarcom";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const menu = [
   {
@@ -26,6 +28,24 @@ const menu = [
     highlight: true,
   },
   {
+    title: "BAGUAL",
+    price: "R$ 18,90",
+    description:
+      "130g, queijo, catupiry, tomate, bacon rústico, maionese da casa e pão brioche.",
+    quote: "É bagual, é raiz, é brabeza no dente.",
+    image: "/menu/bagual.jpg",
+    highlight: false,
+  },
+  {
+    title: "SÓ RAIZ",
+    price: "R$ 14,90",
+    description:
+      "130g de carne, queijo prato, alface, tomate, cebola roxa, maionese da casa e pão brioche.",
+    quote: "Simples, forte e sem frescura.",
+    image: "/menu/soraiz.jpg",
+    highlight: false,
+  },
+  {
     title: "X TUDO",
     price: "R$ 29,90",
     description:
@@ -36,20 +56,11 @@ const menu = [
   },
   {
     title: "XMANSKI",
-    price: "R$ 27,90",
+    price: "R$ 19,90",
     description:
       "130g, cheddar defumado, cream cheese, cebola roxa, picles, milho, maionese do céu e pão brioche.",
     quote: "Só para os mais chegados, que conhecem o Sabor!",
     image: "/menu/xmanski.jpg",
-    highlight: false,
-  },
-  {
-    title: "SÓ RAIZ",
-    price: "R$ 14,90",
-    description:
-      "130g de carne, queijo prato, alface, tomate, cebola roxa, maionese da casa e pão brioche.",
-    quote: "Simples, forte e sem frescura.",
-    image: "/menu/soraiz.jpg",
     highlight: false,
   },
   {
@@ -79,19 +90,17 @@ const menu = [
     image: "/menu/calabreso.jpg",
     highlight: false,
   },
-  {
-    title: "BAGUAL",
-    price: "R$ 18,90",
-    description:
-      "130g, queijo, catupiry, tomate, bacon rústico, maionese da casa e pão brioche.",
-    quote: "É bagual, é raiz, é brabeza no dente.",
-    image: "/menu/bagual.jpg",
-    highlight: false,
-  },
 ];
 
 
 export default function HomePage() {
+  const [modalOpen, setModalOpen] = useState(false)
+  const [mesaSelecionada, setMesaSelecionada] = useState("")
+
+  function abrirModalComMesa(mesa: string) {
+    setMesaSelecionada(mesa);
+    setModalOpen(true);
+  }
   return (
     <main className="p-6 bg-black min-h-screen text-white">
       <header className="text-center mb-10">
@@ -99,13 +108,11 @@ export default function HomePage() {
           <Image 
             src={"/logo.png"} 
             alt={"Logo"} 
-            width={80}
-            height={80}
+            width={200}
+            height={200}
           />
-          <h1 className="text-4xl font-extrabold text-[#f2a900]">XMANSKI</h1>
         </div>
-
-        <CardTitle className="text-gray-300 italic mt-2 max-w-xl mx-auto">
+        <CardTitle className="text-gray-300 italic mt- max-w-xl mx-auto">
           95% dos clientes voltam !!!
         </CardTitle>
         <CardDescription className="text-gray-400 italic mt-1 max-w-xl mx-auto">
@@ -122,7 +129,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1, duration: 0.5 }}
           >
-            <Card className="bg-[#1e1e1e] border p-0 border-[#f2a900]/30 hover:border-[#f2a900] hover:scale-[1.02] transition-all cursor-pointer rounded-xl">
+            <Card className="bg-[#1e1e1e] h-full border p-0 border-[#f2a900]/30 hover:border-[#f2a900] hover:scale-[1.02] transition-all cursor-pointer rounded-xl">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -145,10 +152,13 @@ export default function HomePage() {
                 <p className="italic text-gray-400 text-xs">“{item.quote}”</p>
               </CardContent>
 
-              <CardFooter className="mb-3">
-                <Button className="bg-[#f2a900] text-black hover:bg-[#ffc400] w-full">
-                  Chamar Garçom
-                </Button>
+              <CardFooter className="mb-3 justify-center">
+                <Button className="bg-[#f2a900] w-full text-zinc-900 hover:text-white" onClick={() => abrirModalComMesa(item.title)}>Chamar Garçom</Button>
+                <ModalChamarGarcom
+                  open={modalOpen}
+                  onOpenChange={setModalOpen}
+                  mesa={mesaSelecionada}
+                />
               </CardFooter>
             </Card>
           </motion.div>
