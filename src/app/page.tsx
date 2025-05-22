@@ -1,103 +1,141 @@
+// app/page.tsx
+"use client";
+
 import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
-export default function Home() {
+const menu = [
+  {
+    title: "BRUTINHO",
+    price: "R$ 10,90",
+    description:
+      "90g de carne suculenta, cheddar, maionese da casa e pão brioche selado na manteiga.",
+    quote: "Feito pra pequenos guerreiros com fome de verdade.",
+    image: "/menu/brutinho.jpg",
+    category: "Clássicos",
+    highlight: false,
+  },
+  {
+    title: "CLÁSSICO",
+    price: "R$ 12,90",
+    description:
+      "130g de carne suculenta, cheddar duplo, cebola caramelizada e pão brioche selado na manteiga.",
+    quote: "Pequeno no preço, gigante no sabor.",
+    image: "/menu/classico.jpg",
+    category: "Clássicos",
+    highlight: true,
+  },
+  {
+    title: "X TUDO",
+    price: "R$ 29,90",
+    description:
+    "130g, cheddar defumado, cream cheese, bacon, ovo, presunto, alface, tomate, cebola roxa, milho, batata palha, maionese e pão brioche.",
+    quote: "Come, luta e grita SKÅL!",
+    image: "/menu/xtudo.jpg",
+    category: "Hardcore",
+    highlight: true,
+  },
+  {
+    title: "XMANSKI",
+    price: "R$ 27,90",
+    description:
+      "130g, cheddar defumado, cream cheese, cebola roxa, picles, milho, maionese do céu e pão brioche.",
+    quote: "Só para os mais chegados, que conhecem o Sabor!",
+    image: "/menu/xmanski.jpg",
+    category: "Hardcore",
+    highlight: false,
+  },
+  {
+    title: "SÓ RAIZ",
+    price: "R$ 14,90",
+    description:
+      "130g de carne, queijo prato, alface, tomate, cebola roxa, maionese da casa e pão brioche.",
+    quote: "Simples, forte e sem frescura.",
+    image: "/menu/soraiz.jpg",
+    category: "Clássicos",
+    highlight: false,
+  },
+  {
+    title: "GALO DE GUERRA",
+    price: "R$ 17,90",
+    description:
+      "Peito de frango, queijo prato, bacon, alface, tomate, maionese e pão brioche.",
+    quote: "Galando na guerra dos sabores. 🐓🔥",
+    image: "/menu/galodeguerra.jpg",
+    category: "Clássicos",
+    highlight: false,
+  },
+  {
+    title: "GEMA DURA",
+    price: "R$ 16,90",
+    description:
+      "130g, queijo prato, bacon, ovo frito na manteiga, pimenta do reino, pão brioche.",
+    quote: "Esse lanche vale cada mordida 🥚💥",
+    image: "/menu/gemadura.jpg",
+    category: "Clássicos",
+    highlight: false,
+  },
+  {
+    title: "CALABRESO",
+    price: "R$ 16,90",
+    description:
+      "130g, queijo prato, calabresa, cebola roxa, picles, maionese da casa, pão brioche.",
+    quote: "Fogo na garganta, soco no sabor. 🔥🌶️",
+    image: "/menu/calabreso.jpg",
+    category: "Apimentados",
+    highlight: false,
+  },
+  {
+    title: "BAGUAL",
+    price: "R$ 18,90",
+    description:
+      "130g, queijo, catupiry, tomate, bacon rústico, maionese da casa e pão brioche.",
+    quote: "É bagual, é raiz, é brabeza no dente.",
+    image: "/menu/bagual.jpg",
+    category: "Clássicos",
+    highlight: false,
+  },
+];
+
+const categories = ["Clássicos","Hardcore", "Apimentados", ];
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="p-6 bg-black min-h-screen text-white">
+      <header className="text-center mb-10">
+        <h1 className="text-4xl font- font-extrabold text-[#f2a900]">🍔 XMANSKI </h1>
+        <p className="text-gray-300 italic mt-2 max-w-xl mx-auto">
+          “95% dos clientes voltam... Os outros 5%? Não resistiram de tanto comer...”
+        </p>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <section className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {menu.map((item, i) => (
+          <motion.article
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1, duration: 0.5 }}
+            className="bg-[#1e1e1e] rounded-xl border border-[#f2a900]/30 p-5 cursor-pointer hover:scale-[1.02] hover:border-[#f2a900] transition-transform transition-colors"
           >
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src={item.image}
+              alt={item.title}
+              width={600}
+              height={600}
+              className="w-full h-72 object-cover rounded-lg mb-4 select-none pointer-events-none"
+              priority={i < 3}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <h2 className="text-[#f2a900] text-xl font-semibold mb-1">
+              {item.title} – <span className="text-white">{item.price}</span>
+            </h2>
+            <p className="text-gray-100 mb-2 text-sm leading-relaxed">{item.description}</p>
+            <p className="italic text-gray-400 text-xs">“{item.quote}”</p>
+          </motion.article>
+        ))}
+      </section>
+    </main>
   );
 }
