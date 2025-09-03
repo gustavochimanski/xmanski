@@ -169,12 +169,22 @@ function CarrosselImagens({ images }: { images: string[] }) {
 
   return (
     <div className="relative w-full h-80 overflow-hidden rounded-t-xl">
-      <Image
-        src={images[index]}
-        alt={`Imagem ${index + 1}`}
-        fill
-        className="object-cover select-none pointer-events-none"
-      />
+      {/* Container que desliza */}
+      <div
+        className="flex w-full h-full transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${index * 100}%)` }}
+      >
+        {images.map((src, i) => (
+          <div key={i} className="relative min-w-full h-80">
+            <Image
+              src={src}
+              alt={`Imagem ${i + 1}`}
+              fill
+              className="object-cover select-none pointer-events-none"
+            />
+          </div>
+        ))}
+      </div>
 
       {/* Botões de navegação */}
       {images.length > 1 && (
@@ -183,13 +193,13 @@ function CarrosselImagens({ images }: { images: string[] }) {
             onClick={prev}
             className="absolute top-1/2 left-2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
           >
-            <ChevronLeft/>
+            <ChevronLeft />
           </button>
           <button
             onClick={next}
             className="absolute top-1/2 right-2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
           >
-            <ChevronRight/>
+            <ChevronRight />
           </button>
         </>
       )}
