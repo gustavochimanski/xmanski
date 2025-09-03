@@ -4,7 +4,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Card, CardContent,  CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ModalChamarGarcom } from "./cardapio/components/SheetChamarGarcom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {  ChevronLeft, ChevronRight } from "lucide-react";
