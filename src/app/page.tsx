@@ -143,7 +143,7 @@ export default function HomePage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     >
-                    Chamar Garçom
+                    Pedir agora
                   </a>
                 </Button>
               </CardFooter>
